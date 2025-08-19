@@ -24,6 +24,7 @@
                             <th scope="col" style="text-align: center">Nro</th>
                             <th scope="col" style="text-align: center">Nombre</th>
                             <th scope="col" style="text-align: center">Apellido</th>
+                            <th scope="col" style="text-align: center">Contraseña cifrada</th>
                             <th scope="col" style="text-align: center">Acciones</th>
                         </tr>
                     </thead>
@@ -33,6 +34,7 @@
                                 <td style="text-align: center">{{$loop->iteration}}</td>
                                 <td style="text-align: center">{{ $usuario->name }}</td>
                                 <td style="text-align: center">{{ $usuario->email}}</td>
+                                <td style="text-align: center">{{ \Illuminate\Support\Str::startsWith($usuario->password, '$2y$') ? 'Sí' : 'No' }}</td>
                                 <td style="text-align: center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a href="{{url('admin/usuarios/'.$usuario->id)}}" type="button" class="btn btn-info btn-sm"><i class="bi bi-eye">Ver</i></a>

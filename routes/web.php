@@ -11,24 +11,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//ruta para la vista de index
-Route::get('/dashboard', function () {
-    return view('layouts.admin');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
 
 //rutas de autenticación con Google
 Route::get('/google-auth/redirect', function () {
 return Socialite::driver('google')->redirect();
 })->name('google.redirect');
-
 Route::get('/google-auth/callback', function () {
     $user_google = Socialite::driver('google')->stateless()->user();// no olvidar el stateless para evitar problemas de sesión
 
@@ -47,8 +34,9 @@ Route::get('/google-auth/callback', function () {
     return redirect('dashboard');
 });
 
+
 // Ruta del dashboard del administrador
-Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware(['auth']);
+Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard')->middleware(['auth']);
 
 
 // Ruta para admin/usuarios
@@ -68,6 +56,7 @@ Route::get('/admin/usuarios/{id}/confirm-delete', [App\Http\Controllers\UsuarioC
 // Ruta para mandar la eliminacion
 Route::delete('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy')->middleware(['auth', 'verified']);
 
+
 //rutas de inventario
 Route::get('/admin/inventario', [App\Http\Controllers\InventarioController::class, 'index'])->name('admin.inventario.index')->middleware(['auth', 'verified']);
 // Ruta para gestión de inventario panel crear
@@ -85,6 +74,21 @@ Route::get('/admin/inventario/{id}/confirm-delete', [App\Http\Controllers\Invent
 // Ruta para mandar la eliminacion
 Route::delete('/admin/inventario/{id}', [App\Http\Controllers\InventarioController::class, 'destroy'])->name('admin.inventario.destroy')->middleware(['auth', 'verified']);
 
+
 //rutas AJAX -- valida para obtener los usuarios activos
 Route::get('/admin/sesiones', [App\Http\Controllers\SessionController::class, 'index'])->name('admin.sesiones.index')->middleware(['auth', 'verified']);
 Route::get('/admin/sesiones/activos', [App\Http\Controllers\SessionController::class, 'obtenerUsuariosActivos'])->name('admin.sesiones.obtener')->middleware(['auth', 'verified']);
+
+//rutas pendientes de borrar
+//ruta para la vista de index
+//Route::get('/dashboard', function () {
+//    return view('layouts.admin');
+//})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
