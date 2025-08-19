@@ -47,4 +47,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+     // Relación con las ventas
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class, 'user_id', 'id'); // Un usuario tiene muchas ventas
+    }
 }
