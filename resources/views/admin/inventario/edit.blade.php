@@ -2,121 +2,122 @@
 
 @section('content')
     <div class="row">
-        <h1>Editar Venta: {{$venta->id}}</h1>
+        <h1>Editar Vehículo: {{ $inventario->id }}</h1>
     </div>
     <hr>
     <div class="row">
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Actualice los datos de la venta</h3>
+                    <h3 class="card-title">Actualice los datos del vehículo</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.ventas.update', $venta->id) }}" method="POST">
+                    <form action="{{ route('admin.inventario.update', $inventario->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="row">
+                            {{-- Marca --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="user_id">Identificador del Vendedor</label><b>*</b>
-                                    <select name="user_id" class="form-control" required>
-                                        <option value="" disabled>Seleccionar vendedor...</option>
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" {{ $user->id == old('user_id', $venta->user_id) ? 'selected' : '' }}>
-                                                {{ $user->codigo }} - {{ $user->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('user_id')
+                                    <label for="marca">Marca</label><b>*</b>
+                                    <input type="text" name="marca" value="{{ old('marca', $inventario->marca) }}"
+                                        class="form-control" required>
+                                    @error('marca')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
+                            {{-- Modelo --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="fecha">Fecha</label><b>*</b>
-                                    <input type="date" name="fecha" value="{{ old('fecha', $venta->fecha) }}" class="form-control" required>
-                                    @error('fecha')
+                                    <label for="modelo">Modelo</label><b>*</b>
+                                    <input type="text" name="modelo" value="{{ old('modelo', $inventario->modelo) }}"
+                                        class="form-control" required>
+                                    @error('modelo')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
+                            {{-- Año --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="total">Total</label><b>*</b>
-                                    <input type="number" name="total" value="{{ old('total', $venta->total) }}" class="form-control" required step="0.01">
-                                    @error('total')
+                                    <label for="anio">Año</label><b>*</b>
+                                    <input type="number" name="anio" value="{{ old('anio', $inventario->anio) }}"
+                                        class="form-control" required>
+                                    @error('anio')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
+                            {{-- Precio --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="articulo">Articulo</label><b>*</b>
-                                    <select name="articulo" class="form-control" required>
-                                        <option value="" disabled>Seleccionar...</option>
-                                        <option value="Articulo1" {{ old('articulo', $venta->articulo) == 'Articulo1' ? 'selected' : '' }}>Articulo1</option>
-                                        <option value="Articulo2" {{ old('articulo', $venta->articulo) == 'Articulo2' ? 'selected' : '' }}>Articulo2</option>
-                                        <option value="Articulo3" {{ old('articulo', $venta->articulo) == 'Articulo3' ? 'selected' : '' }}>Articulo3</option>
-                                        <option value="Articulo4" {{ old('articulo', $venta->articulo) == 'Articulo4' ? 'selected' : '' }}>Articulo4</option>
-                                        <option value="Articulo5" {{ old('articulo', $venta->articulo) == 'Articulo5' ? 'selected' : '' }}>Articulo5</option>
-                                    </select>
-                                    @error('articulo')
+                                    <label for="precio">Precio</label><b>*</b>
+                                    <input type="number" step="0.01" name="precio"
+                                        value="{{ old('precio', $inventario->precio) }}" class="form-control" required>
+                                    @error('precio')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
+                            {{-- Estado --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cantidad">Cantidad</label><b>*</b>
-                                    <input type="number" name="cantidad" value="{{ old('cantidad', $venta->cantidad) }}" class="form-control" required>
-                                    @error('cantidad')
+                                    <label for="estado">Estado</label><b>*</b>
+                                    <select name="estado" class="form-control" required>
+                                        <option value="" disabled>Seleccionar...</option>
+                                        <option value="Disponible"
+                                            {{ old('estado', $inventario->estado) == 'Disponible' ? 'selected' : '' }}>
+                                            Disponible</option>
+                                        <option value="Vendido"
+                                            {{ old('estado', $inventario->estado) == 'Vendido' ? 'selected' : '' }}>Vendido
+                                        </option>
+                                        <option value="En mantenimiento"
+                                            {{ old('estado', $inventario->estado) == 'En mantenimiento' ? 'selected' : '' }}>
+                                            En mantenimiento</option>
+                                    </select>
+                                    @error('estado')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
+                            {{-- Kilometraje --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="metodo_pago">Método de Pago</label><b>*</b>
-                                    <select name="metodo_pago" class="form-control" required>
-                                        <option value="" disabled>Seleccionar...</option>
-                                        <option value="Efectivo" {{ old('metodo_pago', $venta->metodo_pago) == 'Efectivo' ? 'selected' : '' }}>Efectivo</option>
-                                        <option value="Tarjeta" {{ old('metodo_pago', $venta->metodo_pago) == 'Tarjeta' ? 'selected' : '' }}>Tarjeta</option>
-                                        <option value="Transferencia" {{ old('metodo_pago', $venta->metodo_pago) == 'Transferencia' ? 'selected' : '' }}>Transferencia</option>
-                                        <option value="Otro" {{ old('metodo_pago', $venta->metodo_pago) == 'Otro' ? 'selected' : '' }}>Otro</option>
-                                    </select>
-                                    @error('metodo_pago')
+                                    <label for="kilometraje">Kilometraje</label><b>*</b>
+                                    <input type="number" name="kilometraje"
+                                        value="{{ old('kilometraje', $inventario->kilometraje) }}" class="form-control"
+                                        required>
+                                    @error('kilometraje')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-md-12">
+                            {{-- Color --}}
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cliente">Cliente</label><b>*</b>
-                                    <select name="cliente" class="form-control" required>
-                                        <option value="" disabled>Seleccionar...</option>
-                                        <option value="Cliente1" {{ old('cliente', $venta->cliente) == 'Cliente1' ? 'selected' : '' }}>Cliente1</option>
-                                        <option value="Cliente2" {{ old('cliente', $venta->cliente) == 'Cliente2' ? 'selected' : '' }}>Cliente2</option>
-                                        <option value="Cliente3" {{ old('cliente', $venta->cliente) == 'Cliente3' ? 'selected' : '' }}>Cliente3</option>
-                                        <option value="Cliente4" {{ old('cliente', $venta->cliente) == 'Cliente4' ? 'selected' : '' }}>Cliente4</option>
-                                        <option value="Otro" {{ old('cliente', $venta->cliente) == 'Otro' ? 'selected' : '' }}>Otro</option>
-                                    </select>
-                                    @error('cliente')
+                                    <label for="color">Color</label><b>*</b>
+                                    <input type="text" name="color" value="{{ old('color', $inventario->color) }}"
+                                        class="form-control" required>
+                                    @error('color')
                                         <small style="color: red">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                         </div>
+
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <a href="{{ url('admin/ventas') }}" class="btn btn-secondary">Cancelar</a>
-                                    <button type="submit" class="btn btn-primary">Actualizar Venta</button>
+                                    <a href="{{ route('admin.inventario.index') }}" class="btn btn-secondary">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary">Actualizar Vehículo</button>
                                 </div>
                             </div>
                         </div>

@@ -75,11 +75,19 @@ class UsuarioController extends Controller
         return view('admin.usuarios.delete', compact('usuario'));
     }
 
-    public function destroy($id){
-        User::destroy($id);
-
-        return redirect()->route(route:'admin.usuarios.index')
-        ->with('mensaje','Se elimino al usuario correctamente')
-        ->with('icono','success');
+    public function destroy($id)
+{
+    // Verificar si el usuario autenticado es el mismo que se intenta eliminar
+    if (auth()->user() && auth()->user()->id == $id) {
+        return redirect()->route('admin.usuarios.index')
+            ->with('mensaje', 'No puedes eliminar tu propio usuario mientras estás logueado')
+            ->with('icono', 'error');
     }
+
+    User::destroy($id);
+
+    return redirect()->route('admin.usuarios.index')
+        ->with('mensaje', 'Se eliminó al usuario correctamente')
+        ->with('icono', 'success');
+}
 }

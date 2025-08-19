@@ -39,9 +39,9 @@
                                     <td style="text-align: center">{{  $inventario->marca}}</td>
                                     <td style="text-align: center">{{ $inventario->modelo}}</td>
                                     <td style="text-align: center">{{ $inventario->anio}}</td>
-                                    <td style="text-align: center">{{ $inventario->precio }}</td>
+                                    <td style="text-align: center">Q {{ number_format($inventario->precio, 2, '.', ',') }}</td>
                                     <td style="text-align: center">{{ $inventario->estado}}</td>
-                                    <td style="text-align: center">{{ $inventario->kilometraje}}</td>
+                                    <td style="text-align: center">{{ number_format($inventario->kilometraje) }} km</td>
                                     <td style="text-align: center">{{ $inventario->color}}</td>
                                     <td style="text-align: center">
                                         <div class="btn-group" role="group" aria-label="Basic example">

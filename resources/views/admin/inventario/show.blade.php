@@ -1,83 +1,95 @@
 @extends('layouts.admin')
 @section('content')
     <div class="row">
-        <h1>Detalle de Venta: {{$venta->id}}</h1>
+        <h1>Detalle de Vehículo: {{ $inventario->id }}</h1>
     </div>
     <hr>
     <div class="row">
         <div class="col-md-12">
             <div class="card card-outline card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Detalles de la venta</h3>
+                    <h3 class="card-title">Detalles del Vehículo</h3>
                 </div>
                 <div class="card-body">
                     <form>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="user_id">Identificador del Vendedor</label>
-                                    <input type="text" value="{{ $venta->usuario->codigo }} - {{ $venta->usuario->name }}" class="form-control" readonly>
+                                    <label for="marca">Marca</label>
+                                    <input type="text" value="{{ $inventario->marca }}" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="fecha">Fecha</label>
-                                    <input type="date" value="{{ $venta->fecha }}" class="form-control" readonly>
+                                    <label for="modelo">Modelo</label>
+                                    <input type="text" value="{{ $inventario->modelo }}" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="total">Total</label>
-                                    <input type="number" value="{{ $venta->total }}" class="form-control" readonly>
+                                    <label for="anio">Año</label>
+                                    <input type="text" value="{{ $inventario->anio }}" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="articulo">Articulo</label>
-                                    <input type="text" value="{{ $venta->articulo }}" class="form-control" readonly>
+                                    <label for="precio">Precio</label>
+                                    <input type="text" value="{{ number_format($inventario->precio, 2, '.', ',') }} $"
+                                        class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cantidad">Cantidad</label>
-                                    <input type="number" value="{{ $venta->cantidad }}" class="form-control" readonly>
+                                    <label for="estado">Estado</label>
+                                    <input type="text" value="{{ $inventario->estado }}" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="metodo_pago">Método de Pago</label>
-                                    <input type="text" value="{{ $venta->metodo_pago }}" class="form-control" readonly>
+                                    <label for="kilometraje">Kilometraje</label>
+                                    <input type="text" value="{{ number_format($inventario->kilometraje) }} km"
+                                        class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cliente">Cliente</label>
-                                    <input type="text" value="{{ $venta->cliente }}" class="form-control" readonly>
+                                    <label for="color">Color</label>
+                                    <input type="text" value="{{ $inventario->color }}" class="form-control" readonly>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-4">
+
+                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cliente">Creado en</label>
-                                    <input type="text" value="{{ $venta->created_at }}" class="form-control" readonly>
+                                    <label>Creado el:</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ $inventario->created_at->format('d/m/Y H:i') }}" disabled>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cliente">Ultima actualización</label>
-                                    <input type="text" value="{{ $venta->updated_at }}" class="form-control" readonly>
+                                    <label>Última actualización:</label>
+                                    <input type="text" class="form-control"
+                                        value="{{ $inventario->updated_at->format('d/m/Y H:i') }}" disabled>
                                 </div>
-                            </div> --}}
+                            </div>
+
                         </div>
+
+                        <!-- Nueva sección para timestamps con estética de form-control -->
+                        <div class="row">
+
+                        </div>
+
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <a href="{{ url('admin/ventas') }}" class="btn btn-secondary">Volver a la lista</a>
-                                </div>
+                                <a href="{{ url('admin/inventario') }}" class="btn btn-secondary">Volver a la lista</a>
                             </div>
                         </div>
                     </form>

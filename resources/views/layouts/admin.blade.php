@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('/admin') }}" class="nav-link">Sistemas Automotriz</a>
+                    <a href="{{ url('/dashboard') }}" class="nav-link">Sistemas Automotriz</a>
                 </li>
             </ul>
         </nav>
@@ -49,7 +49,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{{ url('/admin') }}" class="brand-link">
+            <a href="{{ url('/dashboard') }}" class="brand-link">
                 <img src="{{ url('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Sistemas Automotriz</span>

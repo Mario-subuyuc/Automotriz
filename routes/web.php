@@ -30,7 +30,7 @@ return Socialite::driver('google')->redirect();
 })->name('google.redirect');
 
 Route::get('/google-auth/callback', function () {
-    $user_google = Socialite::driver('google')->stateless()->user();
+    $user_google = Socialite::driver('google')->stateless()->user();// no olvidar el stateless para evitar problemas de sesión
 
     $user = User::updateOrCreate(
         [
@@ -48,7 +48,8 @@ Route::get('/google-auth/callback', function () {
 });
 
 // Ruta del dashboard del administrador
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware(['auth']);
+Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware(['auth']);
+
 
 // Ruta para admin/usuarios
 Route::get('/admin/usuarios', [App\Http\Controllers\UsuarioController::class, 'index'])->name('admin.usuarios.index')->middleware(['auth', 'verified',]);
@@ -67,27 +68,22 @@ Route::get('/admin/usuarios/{id}/confirm-delete', [App\Http\Controllers\UsuarioC
 // Ruta para mandar la eliminacion
 Route::delete('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy')->middleware(['auth', 'verified']);
 
-//rutas de ventas
+//rutas de inventario
 Route::get('/admin/inventario', [App\Http\Controllers\InventarioController::class, 'index'])->name('admin.inventario.index')->middleware(['auth', 'verified']);
-// Ruta para gestión de ventas panel crear
+// Ruta para gestión de inventario panel crear
 Route::get('/admin/inventario/create', [App\Http\Controllers\InventarioController::class, 'create'])->name('admin.inventario.create')->middleware(['auth', 'verified']);
 // Ruta para gestión de envio de formulario crear
 Route::post('/admin/inventario/create', [App\Http\Controllers\InventarioController::class, 'store'])->name('admin.inventario.store')->middleware(['auth', 'verified']);
-// Ruta para ver Venta por id
+// Ruta para ver inventario por id
 Route::get('/admin/inventario/{id}', [App\Http\Controllers\InventarioController::class, 'show'])->name('admin.inventario.show')->middleware(['auth', 'verified']);
-// Ruta para ver editar Venta
+// Ruta para ver editar inventario
 Route::get('/admin/inventario/{id}/edit', [App\Http\Controllers\InventarioController::class, 'edit'])->name('admin.inventario.edit')->middleware(['auth', 'verified']);
-// Ruta para enviar la actualizacion Venta
+// Ruta para enviar la actualizacion
 Route::put('/admin/inventario/{id}', [App\Http\Controllers\InventarioController::class, 'update'])->name('admin.inventario.update')->middleware(['auth', 'verified']);
-// Ruta para ver eliminar Venta
+// Ruta para ver eliminar
 Route::get('/admin/inventario/{id}/confirm-delete', [App\Http\Controllers\InventarioController::class, 'confirmDelete'])->name('admin.inventario.confirmDelete')->middleware(['auth', 'verified']);
 // Ruta para mandar la eliminacion
 Route::delete('/admin/inventario/{id}', [App\Http\Controllers\InventarioController::class, 'destroy'])->name('admin.inventario.destroy')->middleware(['auth', 'verified']);
-
-
-//Rutas para ver usuario activo
-//Route::get('/admin/sesiones', [App\Http\Controllers\SessionController::class, 'index'])->name('admin.sesiones.index')->middleware(['auth', 'verified', 'two_factor']);
-
 
 //rutas AJAX -- valida para obtener los usuarios activos
 Route::get('/admin/sesiones', [App\Http\Controllers\SessionController::class, 'index'])->name('admin.sesiones.index')->middleware(['auth', 'verified']);

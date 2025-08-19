@@ -1,85 +1,99 @@
 @extends('layouts.admin')
+
 @section('content')
     <div class="row">
-        <h1>Borrar : {{$venta->id}}</h1>
+        <h1>Eliminar vehículo: {{ $inventario->id }}</h1>
     </div>
     <hr>
     <div class="row">
         <div class="col-md-12">
             <div class="card card-danger">
                 <div class="card-header">
-                    <h3 class="card-title">¿Esta seguro de eliminar este registro?</h3>
+                    <h3 class="card-title">¿Está seguro de eliminar este registro?</h3>
                 </div>
                 <div class="card-body">
-                    <form action= "{{url('/admin/ventas/'.$venta->id)}}" method="POST">
+                    <form action="{{ route('admin.inventario.destroy', $inventario->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
+
                         <div class="row">
+                            {{-- Marca --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="user_id">Identificador del Vendedor</label>
-                                    <input type="text" value="{{ $venta->usuario->codigo }} - {{ $venta->usuario->name }}" class="form-control" readonly>
+                                    <label>Marca</label>
+                                    <input type="text" value="{{ $inventario->marca }}" class="form-control" readonly>
                                 </div>
                             </div>
+                            {{-- Modelo --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="fecha">Fecha</label>
-                                    <input type="date" value="{{ $venta->fecha }}" class="form-control" readonly>
+                                    <label>Modelo</label>
+                                    <input type="text" value="{{ $inventario->modelo }}" class="form-control" readonly>
                                 </div>
                             </div>
+                            {{-- Año --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="total">Total</label>
-                                    <input type="number" value="{{ $venta->total }}" class="form-control" readonly>
+                                    <label>Año</label>
+                                    <input type="text" value="{{ $inventario->anio }}" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
+                            {{-- Precio --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="articulo">Articulo</label>
-                                    <input type="text" value="{{ $venta->articulo }}" class="form-control" readonly>
+                                    <label>Precio</label>
+                                    <input type="text" value="{{ $inventario->precio }}" class="form-control" readonly>
                                 </div>
                             </div>
+                            {{-- Estado --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cantidad">Cantidad</label>
-                                    <input type="number" value="{{ $venta->cantidad }}" class="form-control" readonly>
+                                    <label>Estado</label>
+                                    <input type="text" value="{{ $inventario->estado }}" class="form-control" readonly>
                                 </div>
                             </div>
+                            {{-- Kilometraje --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="metodo_pago">Método de Pago</label>
-                                    <input type="text" value="{{ $venta->metodo_pago }}" class="form-control" readonly>
+                                    <label>Kilometraje</label>
+                                    <input type="text" value="{{ $inventario->kilometraje }}" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
+                            {{-- Color --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cliente">Cliente</label>
-                                    <input type="text" value="{{ $venta->cliente }}" class="form-control" readonly>
+                                    <label>Color</label>
+                                    <input type="text" value="{{ $inventario->color }}" class="form-control" readonly>
                                 </div>
                             </div>
+                            {{-- Creado en --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cliente">Creado en</label>
-                                    <input type="text" value="{{ $venta->created_at }}" class="form-control" readonly>
+                                    <label>Creado en</label>
+                                    <input type="text" value="{{ $inventario->created_at }}" class="form-control" readonly>
                                 </div>
                             </div>
+                            {{-- Última actualización --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="cliente">Ultima actualización</label>
-                                    <input type="text" value="{{ $venta->updated_at }}" class="form-control" readonly>
+                                    <label>Última actualización</label>
+                                    <input type="text" value="{{ $inventario->updated_at }}" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
+
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <a href="{{url('admin/ventas')}}" class= "btn btn-secondary">Cancelar</a>
-                                    <button type ="submit" class= "btn btn-danger" >Eliminar Venta</button>
+                                    <a href="{{ route('admin.inventario.index') }}" class="btn btn-secondary">Cancelar</a>
+                                    <button type="submit" class="btn btn-danger">Eliminar Vehículo</button>
                                 </div>
                             </div>
                         </div>
