@@ -1,61 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Autenticación con Arquitectura Cliente-Servidor
+# Grupo numero 5
+# Curso SEGURIDAD Y AUDITORÍA DE SISTEMAS - B
+# Docente ING. JOSE LUIS SUCUC OTZOY
+## Descripción del Proyecto
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto tiene como objetivo desarrollar un sistema de autenticación basado en una arquitectura cliente-servidor para la gestión de inventario automotriz. El sistema implementa diferentes métodos de autenticación, incluyendo autenticación básica, autenticación con cifrado de contraseñas y login con Google, permitiendo a los usuarios acceder de forma segura al sistema.
 
-## About Laravel
+1. **AUTENTICACIÓN BÁSICA** (sin cifrado).
+- **Descripción**: El usuario proporciona su nombre de usuario y contraseña en texto plano siguiento los siguientes pasos:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Paso1** ![Pantalla de registro](screenshots/registrer.jpg)
+**Paso2** ![Ingreso de informacion](screenshots/sincifrado.jpg)
+**Paso3** ![Guardado en Base de Datos sin cifrado](screenshots/bdsincifrado.jpg)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. **AUTENTICACIÓN CON CIFRADO DE CONTRASEÑAS** (utilizando hash).
+- **Descripción**: Las contraseñas se cifran utilizando bcrypt antes de ser almacenadas.
+**Paso1** ![Pantalla de registro](screenshots/registrer.jpg)
+**Paso2** ![Ingreso de informacion](screenshots/concifrado.jpg)
+**Paso3** ![Guardado en Base de Datos con cifrado](screenshots/bdconcifrado.jpg)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. **AUTENTECACIÓN CON GOOGLE** (OAuth2).
+- **Descripción**: Los usuarios pueden iniciar sesión mediante su cuenta de Google.
+**Paso1** ![Pantalla de registro](screenshots/registrergoogle.jpg)
+**Paso2** ![Ingreso de usuario](screenshots/correo.jpg)
+**Paso3** ![Ingreso de contrasenia](screenshots/correopass.jpg)
+**Paso4** ![Guardado en Base de Datos con cifrado](screenshots/bdcongoogle.jpg)
 
-## Learning Laravel
+El sistema también gestiona un **inventario de vehículos**, permitiendo a los usuarios listar vehículos con información como marca, modelo, año, precio, estado, kilometraje y color.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Métodos de Autenticación Implementados
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 1. Autenticación Básica (Sin Cifrado)
+- **Descripción**: El usuario proporciona su nombre de usuario y contraseña en texto plano. Este método no utiliza cifrado, lo que lo hace vulnerable a ataques de interceptación (por ejemplo, sniffing).
+- **Uso**: Este método sirve como un ejemplo básico de autenticación, ideal para pruebas de seguridad y aprendizaje sobre la gestión de contraseñas sin cifrado.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Autenticación con Cifrado de Contraseña
+- **Descripción**: Las contraseñas de los usuarios se cifran utilizando algoritmos de **hash** como **bcrypt** o **SHA-256** antes de ser almacenadas en la base de datos. Esto mejora la seguridad, ya que las contraseñas no se almacenan en texto claro.
+- **Uso**: Este método asegura que las contraseñas sean irreversibles y difíciles de obtener incluso si la base de datos es comprometida.
+- **Algoritmos utilizados**:
+  - **bcrypt**: Usado para hash de contraseñas, proporcionando una capa de seguridad adicional frente a ataques de fuerza bruta.
+  - **SHA-256**: Alternativa que genera un hash seguro.
 
-## Laravel Sponsors
+### 3. Login con Google (OAuth2)
+- **Descripción**: Este método permite a los usuarios autenticarse mediante su cuenta de Google utilizando el protocolo **OAuth2**. Al hacerlo, el sistema obtiene un token de acceso y almacena los datos necesarios para manejar la sesión del usuario.
+- **Uso**: Los usuarios pueden iniciar sesión sin necesidad de crear una cuenta manualmente. Este método es útil para una experiencia de usuario más fluida y rápida.
+- **Implementación**: Utiliza el paquete **Laravel Socialite** para integrar el login de Google.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Tecnologías Implementadas
 
-### Premium Partners
+- **Arquitectura**: Cliente-Servidor
+- **Protocolo de Comunicación**: HTTP/HTTPS
+- **API de Google OAuth2**: Para permitir la autenticación con Google.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Lenguaje de Programación Utilizado
 
-## Contributing
+- **Backend**: **PHP** (utilizando el framework **Laravel**)
+- **Frontend**: **HTML**, **CSS**, **JavaScript**
+- **Base de Datos**: **MySQL** para el almacenamiento de usuarios e inventarios de vehículos.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Librerías o Frameworks Empleados
 
-## Code of Conduct
+- **Laravel**: Framework PHP utilizado para el desarrollo backend.
+- **Laravel Socialite**: Para la integración con servicios externos, como Google, para la autenticación.
+- **bcrypt**: Para el cifrado de contraseñas.
+- **SHA-256**: Alternativa para hash de contraseñas.
+- **Axios**: Para realizar peticiones HTTP en el frontend.
+- **TailwindCSS**: Utilizado para estilizar la interfaz de usuario.
+- **Laravel Passport**: Para la implementación de autenticación API basada en tokens.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Sistema de Gestión de Base de Datos
 
-## Security Vulnerabilities
+El sistema utiliza **MySQL** para gestionar los datos de usuarios e inventarios de vehículos. Las tablas clave incluyen:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Usuarios**: Contiene información como el nombre, correo electrónico y la contraseña cifrada del usuario.
+- **Vehículos**: Incluye los detalles de los vehículos disponibles en el inventario, como marca, modelo, año, precio, estado, kilometraje y color.
 
-## License
+Las migraciones se gestionan a través de las migraciones de Laravel, lo que facilita la creación y actualización de las tablas.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Herramientas de Cifrado Utilizadas
+
+- **bcrypt**: Usado para almacenar las contraseñas de forma segura en la base de datos.
+- **SHA-256**: Un algoritmo de hash criptográfico utilizado para generar contraseñas seguras (aunque bcrypt es preferido por su capacidad de ajustar la dificultad de hash).
+- **Laravel Socialite**: Para gestionar el flujo de autenticación OAuth2 con Google.
+
+## Instalación
+Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
+
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/Mario-subuyuc/Automotriz.git
+
+2. **Instalar las dependencias**:
+Instala las dependencias de PHP:
+composer install
+
+Instala las dependencias de Node.js:
+npm install
+
+3. **Configurar el archivo .env**:
+## Copia el archivo .env.example a .env y edita las siguientes configuraciones:
+## Configura las credenciales de tu base de datos:
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=automotriz
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+
+## Configura las credenciales de Google OAuth:
+GOOGLE_CLIENT_ID=tu_cliente_id
+GOOGLE_CLIENT_SECRET=tu_cliente_secreto
+GOOGLE_REDIRECT_URI=http://localhost:8000/login/google/callback
+
+## Ejecutar las migraciones:
+Ejecuta las migraciones para crear las tablas de la base de datos:
+php artisan migrate
+
+## Iniciar el servidor:
+Inicia el servidor de desarrollo:
+php artisan serve --host test.com
+npm run dev
+
+Acceder al sistema:
+http://test.com:8000
