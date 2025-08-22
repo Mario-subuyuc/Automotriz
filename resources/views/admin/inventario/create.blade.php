@@ -41,6 +41,7 @@
                                 @enderror
                             </div>
                         </div>
+                        <!-- Campo para modelo del vehículo -->
                         {{-- Año --}}
                         <div class="col-md-4">
                             <div class="form-group">
@@ -53,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-
+<!-- Campo para modelo del vehículo -->
                     <div class="row">
                         {{-- Precio --}}
                         <div class="col-md-4">
@@ -66,6 +67,7 @@
                                 @enderror
                             </div>
                         </div>
+                        <!-- Campo para modelo del vehículo -->
                         {{-- Estado --}}
                         <div class="col-md-4">
                             <div class="form-group">
