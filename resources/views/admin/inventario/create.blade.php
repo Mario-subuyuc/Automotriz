@@ -17,6 +17,7 @@
                 <form action="{{ route('admin.inventario.store') }}" method="POST">
                     @csrf
                     <div class="row">
+                        <!-- Campo para agregar marca del vehiculo -->
                         {{-- Marca --}}
                         <div class="col-md-4">
                             <div class="form-group">
