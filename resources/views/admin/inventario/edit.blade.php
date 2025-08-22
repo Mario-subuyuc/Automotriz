@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="row">
+    <!-- Titulo de la ventana Editar, Muestra el ID del vehiculo que se editará -->
         <h1>Editar Vehículo: {{ $inventario->id }}</h1>
     </div>
     <hr>
@@ -16,6 +17,7 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
+                            <!-- Muestra los datos del Vehiculo según el ID seleccionado -->
                             {{-- Marca --}}
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -63,6 +65,8 @@
                                     @enderror
                                 </div>
                             </div>
+                            <!-- Desglosa los posibles estados del vehículo -->
+
                             {{-- Estado --}}
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -116,7 +120,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <!-- Boton que cancela la eliminación -->
                                     <a href="{{ route('admin.inventario.index') }}" class="btn btn-secondary">Cancelar</a>
+<!-- Boton que envia los nuevos datos del vehiculo segun el id a la ruta -->
                                     <button type="submit" class="btn btn-primary">Actualizar Vehículo</button>
                                 </div>
                             </div>

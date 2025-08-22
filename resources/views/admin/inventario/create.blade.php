@@ -41,7 +41,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- Campo para modelo del vehículo -->
+                        <!-- Campo para Año del vehículo -->
                         {{-- Año --}}
                         <div class="col-md-4">
                             <div class="form-group">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-<!-- Campo para modelo del vehículo -->
+<!-- Campo para Precio del vehículo -->
                     <div class="row">
                         {{-- Precio --}}
                         <div class="col-md-4">
@@ -67,7 +67,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- Campo para modelo del vehículo -->
+                        <!-- Campo para Estado del vehículo -->
                         {{-- Estado --}}
                         <div class="col-md-4">
                             <div class="form-group">
@@ -83,6 +83,7 @@
                                 @enderror
                             </div>
                         </div>
+                        <!-- Campo para Kilometraje del vehículo -->
                         {{-- Kilometraje --}}
                         <div class="col-md-4">
                             <div class="form-group">
@@ -95,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-
+<!-- Campo para Color del vehículo -->
                     {{-- Color --}}
                     <div class="row">
                         <div class="col-md-6">
@@ -109,7 +110,7 @@
                             </div>
                         </div>
                     </div>
-
+<!-- Botón que envía los datos para la ruta route('admin.inventario.store' -->
                     <hr>
                     <div class="row">
                         <div class="col-md-12">

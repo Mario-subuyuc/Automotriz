@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="row">
+    <!-- Tiitulo de la ventana Eliminar, Muestra el ID del vehiculo que se eliminará -->
         <h1>Eliminar vehículo: {{ $inventario->id }}</h1>
     </div>
     <hr>
@@ -12,10 +13,11 @@
                     <h3 class="card-title">¿Está seguro de eliminar este registro?</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.inventario.destroy', $inventario->id) }}" method="POST">
+                <!-- Muestra los datos del Vehiculo según el ID seleccionado -->    
+                <form action="{{ route('admin.inventario.destroy', $inventario->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-
+<!-- Se desglosan los detalles como marca, modelo, año, precio, etc. -->
                         <div class="row">
                             {{-- Marca --}}
                             <div class="col-md-4">
@@ -92,7 +94,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <!-- Botón que cancela la eliminación -->
                                     <a href="{{ route('admin.inventario.index') }}" class="btn btn-secondary">Cancelar</a>
+                                    <!-- Botón que confirma la eliminación, este envía los datos a la ruta route('admin.inventario.destroy', $inventario->id) -->
                                     <button type="submit" class="btn btn-danger">Eliminar Vehículo</button>
                                 </div>
                             </div>
