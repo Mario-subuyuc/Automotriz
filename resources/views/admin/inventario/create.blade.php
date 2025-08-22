@@ -13,6 +13,7 @@
                 <h3 class="card-title">Ingrese los datos del vehículo</h3>
             </div>
             <div class="card-body">
+                <!-- formulario para Guardar vehículo -->
                 <form action="{{ route('admin.inventario.store') }}" method="POST">
                     @csrf
                     <div class="row">
