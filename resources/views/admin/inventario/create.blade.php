@@ -29,6 +29,7 @@
                                 @enderror
                             </div>
                         </div>
+                        <!-- Campo para modelo del vehículo -->
                         {{-- Modelo --}}
                         <div class="col-md-4">
                             <div class="form-group">
